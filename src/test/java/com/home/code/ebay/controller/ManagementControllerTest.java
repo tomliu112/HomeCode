@@ -5,6 +5,7 @@ import com.home.code.ebay.EbayApplication;
 import com.home.code.ebay.pojo.User;
 import com.home.code.ebay.util.FileHandlerWithReadWriteLock;
 import com.home.code.ebay.util.TokenUtil;
+import jakarta.annotation.Resource;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -39,7 +40,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class ManagementControllerTest {
 
-    @Autowired
+    @Resource
     private MockMvc mockMvc ;
 
     @BeforeClass
