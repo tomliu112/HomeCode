@@ -3,8 +3,10 @@ package com.home.code.ebay.controller;
 import com.google.gson.Gson;
 import com.home.code.ebay.EbayApplication;
 import com.home.code.ebay.pojo.User;
+import com.home.code.ebay.util.FileHandlerWithReadWriteLock;
 import com.home.code.ebay.util.TokenUtil;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +41,29 @@ public class ManagementControllerTest {
 
     @Autowired
     private MockMvc mockMvc ;
+
+    @BeforeClass
+    public static void init() throws IOException {
+        User user2=new User();
+        List<String> resources = new ArrayList<>();
+        resources.add("abc2");
+        resources.add("mnc2");
+        user2.setUserId("test2");
+        user2.setRole("user");
+        user2.setResources(resources);
+
+        User user3=new User();
+        List<String> resources3 = new ArrayList<>();
+        resources3.add("abc3");
+        resources3.add("mnc3");
+        user3.setUserId("test3");
+        user3.setRole("user");
+        user3.setResources(resources3);
+
+        FileHandlerWithReadWriteLock.addUserToFile("access/info.txt",user2);
+        FileHandlerWithReadWriteLock.addUserToFile("access/info.txt",user3);
+
+    }
 
 
     @Test
