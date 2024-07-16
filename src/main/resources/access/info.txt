@@ -1,0 +1,2 @@
+{"userId":"test2","role":"user","resources":["abc2","mnc2"]}
+{"userId":"test3","role":"user","resources":["abc3","mnc3"]}
