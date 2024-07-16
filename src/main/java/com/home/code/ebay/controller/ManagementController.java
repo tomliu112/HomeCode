@@ -38,12 +38,8 @@ public class ManagementController {
     @GetMapping("/user/{resource}")
     public ResponseResult<String> judgeAccess(@PathVariable("resource") String resource,@RequestHeader("token") String token) {
         try {
-            boolean re = managementService.judgeAccess(token,resource);
-            if(re){
-                return ResponseResult.success("user has access of "+resource);
-            }
-
-            return ResponseResult.success("user has no access of "+resource);
+            String re = managementService.judgeAccess(token,resource);
+            return ResponseResult.success(re);
 
         } catch (Exception e) {
             log.error(e.getMessage());

@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.home.code.ebay.EbayApplication;
 import com.home.code.ebay.pojo.User;
 import com.home.code.ebay.util.TokenUtil;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,7 @@ public class ManagementControllerTest {
 
     @Autowired
     private MockMvc mockMvc ;
+
 
     @Test
     public void testAddUserWhenUserIsAdmin() throws Exception {
@@ -95,6 +97,17 @@ public class ManagementControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk()) .andExpect(content().contentType("application/json"))
                 .andExpect(jsonPath("$.data").value("user has no access of mnc3"));;
+    }
+
+    @Test
+    public void testJudgeAccessWhenNoSuchUser() throws Exception {
+
+        String token = TokenUtil.generateToken("test5","user");
+
+        mockMvc.perform(get("/user/{resource}","mnc3").header("token",token))
+                .andDo(print())
+                .andExpect(status().isOk()) .andExpect(content().contentType("application/json"))
+                .andExpect(jsonPath("$.data").value("no such user"));;
     }
 
 }

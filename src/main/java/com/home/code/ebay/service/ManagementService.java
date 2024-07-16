@@ -23,18 +23,18 @@ public class ManagementService {
         return false;
     }
 
-    public boolean judgeAccess(String token,String resource) throws IOException{
+    public String judgeAccess(String token,String resource) throws IOException{
         String[] roleInfo = TokenUtil.parseToken(token);
         User user=FileHandlerWithReadWriteLock.getUserFromFile(accessFile,roleInfo[0]);
         // not find user
         if(user==null){
-            return false;
+            return "no such user";
         }
         var resources=user.getResources();
         if(resources.contains(resource)){
-            return true;
+            return "user has access of "+resource;
         }
         //not find resource
-        return false;
+        return "user has no access of "+resource;
     }
 }

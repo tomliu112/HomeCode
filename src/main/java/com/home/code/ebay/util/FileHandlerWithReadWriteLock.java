@@ -23,7 +23,7 @@ public class FileHandlerWithReadWriteLock {
         lock.writeLock().lock();
 
         try (FileWriter fileWriter = new FileWriter(PATH+file,true)) {
-            fileWriter.write(gson.toJson(userInfo)+"\n");
+            fileWriter.write(gson.toJson(userInfo)+System.lineSeparator());
         }  finally {
             lock.writeLock().unlock();
         }
